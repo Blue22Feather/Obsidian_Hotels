@@ -1,0 +1,64 @@
+                                <div class="Table">
+                                    <table>
+                                        <tr>
+                                            <th></th>
+                                            <th>
+                                                <span>
+                                                    <a target="_blank" rel="noopener noreferrer" href="https://www.booking.com/">
+                                                        <svg class="icon">
+                                                            <use href="./assets/svg-resources.xml#icon-booking-letters"></use>
+                                                        </svg>
+                                                    </a>
+                                                </span>
+                                            </th>
+                                            <th>
+                                                <span>
+                                                    <a target="_blank" rel="noopener noreferrer" href="https://www.expedia.com/es/">
+                                                        <svg class="icon">
+                                                            <use href="./assets/svg-resources.xml#icon-expedia-letters"></use>
+                                                        </svg>
+                                                    </a>
+                                                </span>
+                                            </th>
+                                            <th>
+                                                <span>
+                                                    <a target="_blank" rel="noopener noreferrer" href="https://www.tripadvisor.com.ar/">
+                                                        <svg class="icon">
+                                                            <use href="./assets/svg-resources.xml#icon-tripadvisor-letters"></use>
+                                                        </svg>
+                                                    </a>
+                                                </span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://hotelelcasco.com.ar/web/">El Casco Art Hotel</a></span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.booking.com/hotel/ar/el-casco-art.es-ar.html">9.3 / 10</a> 415 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.expedia.com/es/San-Carlos-De-Bariloche-Hoteles-El-Casco-Art-Hotel.h1614096.Informacion-Hotel">9.4 / 10</a> 110 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.tripadvisor.com.ar/Hotel_Review-g312848-d639446-Reviews-El_Casco_Art_Hotel-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html">4.5 / 5</a> 553</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://llaollao.com/">Llao Llao Resort Golf & Spa</a></span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.booking.com/hotel/ar/llao-llao-rsort-golf-spa.es-ar.html">9.0 / 10</a> 2.679 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.expedia.com.ar/San-Carlos-De-Bariloche-Hoteles-Llao-Llao-Hotel-Resort-Golf-Spa.h82768.Informacion-Hotel">9.2 / 10</a> 439 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.tripadvisor.com.ar/Hotel_Review-g312848-d301975-Reviews-Llao_Llao_Hotel_Resort_Golf_Spa-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html">4.5 / 5</a> 3513 </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.peuma-hue.com/">Peuma Hue Resort & Cabañas</a></span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.booking.com/hotel/ar/estancia-peuma-hue.es-ar.html">9.4 / 10</a> 9 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.expedia.com/es/San-Carlos-De-Bariloche-Hoteles-Estancia-Peuma-Hue-Carre-Lauken.h2052056.Informacion-Hotel">8.0 / 10</a> 3 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.tripadvisor.es/Hotel_Review-g312848-d550870-Reviews-Estancia_Peuma_Hue-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html">5 / 5</a> 428 </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://almasuites.com/">Alma Del Lago Suites & Spa</a></span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.booking.com/hotel/ar/alma-del-lago-suites-spa.es-ar.html">8.6 / 10</a> 549 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.expedia.com/es/San-Carlos-De-Bariloche-Hoteles-Alma-Del-Lago-Suites-Spa.h4445319.Informacion-Hotel">8.8 / 10</a> 311 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.tripadvisor.com.ar/Hotel_Review-g312848-d2040034-Reviews-Alma_Del_Lago_Suites_Spa-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html">4 / 5</a> 1415 </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.charming-bariloche.com/">Charming Luxury Lodge & Private Spa</a></span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.booking.com/hotel/ar/charming-luxury-lodge-private-spa.es-ar.html">9.4 / 10</a> 281 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.expedia.com/es/San-Carlos-De-Bariloche-Hoteles-Charming-Luxury-Lodge-Private-Spa.h3200314.Informacion-Hotel">9.6 / 10</a> 281 </span></td>
+                                            <td><span><a target="_blank" rel="noopener noreferrer" href="https://www.tripadvisor.com.ar/Hotel_Review-g312848-d1414966-Reviews-Charming_Luxury_Lodge_Private_Spa-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patago.html">5 / 5</a> 2414 </span></td>
+                                        </tr>
+                                    </table>
+                                </div>

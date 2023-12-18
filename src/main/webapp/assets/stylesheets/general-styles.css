@@ -1,0 +1,169 @@
+/* Variables y Colores Globales */
+:root {
+    --global-text-color: white;
+    --background-color_1: #4E423D;
+    --color__gold-one: #C8A037;
+    --color__gold-one--rgb: 200, 160, 55;
+    --color__dark-gray_0: #111111;
+    --color__dark-gray_1: #1B1B1B;
+    --color__dark-gray_2: #2B2B2B;
+    --color__black_1: #151515;
+    --color__black_1--rgb: 21, 21, 21;
+    --color__orange-one: #9C7500;
+
+    /* Variables de Dropdowns*/
+    --dropdown-background-color: var(--color__black_1);
+    --dropdown-border-color: var(--color__orange-one);
+    --dropdown-text-color: var(--global-text-color);
+    --dropdown-linked-item-color: var(--color__gold-one);
+    --dropdown-linked-item-background-color: rgba(var(--color__gold-one--rgb),0.2);
+
+    /* Variabales del global_nav */
+    --global-nav-background-color: rgba(var(--color__black_1--rgb), 0.3);
+    --global-nav-text-color: #7853F2;
+    --global-nav-icon-border-color: gray;
+    --global-nav-icon-background-color: var(--color__dark-gray_1);
+    --global-nav-icon-border-color--hover: var(--color__orange-one);
+    --global-nav-icon-background-color--hover: var(--color__dark-gray_2);
+
+    /* Variables del header automatico*/
+    --sticky-nav-background-color: rgba(var(--color__black_1--rgb), 0.5);
+    --sticky-nav-text-color: var(--color__gold-one);
+
+    /* Variables de navegacion de sitio */
+    --header-background-color: var(--color__black_1);
+    --header-nav-special-text-color: var(--color__gold-one);
+    --header-nav-text-color: var(--global-text-color);
+
+    /* Variables generales */
+    --btn-border-color: var(--color__orange-one);
+    --btn-background-color: var(--color__dark-gray_0);
+    --btn-background-img: ;
+
+    --link-color: var(--global-nav-text-color);
+    --link-color--hover: var(--color__gold-one);
+
+    --card-border-color: var(--color__gold-one);
+    --card-tittle-color: var(--color__gold-one);
+
+    /* Variables de PageBox */
+    --PageBox-division-color: black;
+    --PageBox-opaque--fadeout: rgba(var(--color__black_1--rgb), 0.9);
+    --PageBox-opaque--fadeout_2: rgba(var(--color__black_1--rgb), 0.5);
+    --PageBox-card-background-color: var(--color__black_1);
+    --PageBox-background-color: var(--color__dark-gray_2);
+    --PageBox-fadeborder-background-color: var(--color__dark-gray_0);
+    --PageBox-table-background-color: var(--color__dark-gray_0);
+    --PageBox-table-background-color--hover: var(--color__dark-gray_1);
+    --PageBox-dropdown-interact: var(--global-nav-text-color);
+    --PageBox-table-list-separator-color: var(--color__orange-one);
+    --PageBox-table-list-bg-color: var(--color__dark-gray_1);
+    --PageBox-BigCard-bg-color: var(--color__dark-gray_2);
+}
+
+body {
+    background-image: url("../img/volcanic_obsidian.jpg");
+}
+
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: initial;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'manrope';
+}
+
+*, :after, :before {
+    box-sizing: inherit;
+}
+
+/* Barra de navegacion minimalista */
+::-webkit-scrollbar {width: 6px;}
+::-webkit-scrollbar-track {background: var(--color__black_1);}
+::-webkit-scrollbar-thumb {background: var(--color__dark-gray_2);}
+::-webkit-scrollbar-thumb:hover {background: var(--color__gold-one);}
+
+/* Apartado de Fuentes de texto */
+
+@font-face {
+    font-family: 'Manrope';
+    src: url('../font/Manrope-VariableFont_wght.ttf');
+    /* ExtraLight = font-weight: 200; */
+    /* Light = font-weight: 300; */
+    /* Regular = font-weight: 400; */
+    /* Medium = font-weight: 500; */
+    /* SemiBold = font-weight: 600 */
+    /* Bold = font-weight: 700 */
+    /* ExtraBold = font-weight: 800 */
+}
+
+@font-face {
+    font-family: 'cart';
+    src: url('../font/Perfect\ Beloved.otf');
+}
+
+/* Apartado de animaciones */
+
+@keyframes glow-text {
+    0% {
+      text-shadow: 0 0 5px var(--color__gold-one);
+    }
+    50% {
+      text-shadow: 0 0 15px var(--color__gold-one);
+    }
+    100% {
+      text-shadow: 0 0 5px var(--color__gold-one);
+    }
+}
+
+@keyframes glow-global {
+    0% {
+        box-shadow: 0 0 10px var(--color__gold-one);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--color__gold-one);
+    }
+    100% {
+        box-shadow: 0 0 10px var(--color__gold-one);
+    }
+}
+
+@keyframes glow-box {
+    0% {
+        box-shadow: 0 0 5px var(--color__gold-one);
+    }
+    50% {
+        box-shadow: 0 0 15px var(--color__gold-one);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--color__gold-one);
+    }
+}
+
+@keyframes rotBorder {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes steam {
+	0% {
+		background-position: 0 0;
+	}
+	50% {
+		background-position: 400% 0;
+	}
+	100% {
+		background-position: 0 0;
+	}
+}
+  
+@keyframes dispel {
+    from {opacity: 0.5}
+    to {opacity: 1}
+}

@@ -366,12 +366,43 @@
                         </div>
                         <div class="page__content">
                             <div class="PageBox multi-card__wrapper">
-                                <div class="Simple-ToRow">
-                                    habitacion seleccionada
+                                <div class="book-room">
+                                    <div class="book-room__img">imagen</div>
+                                    <div class="book-room__content">
+                                        <div class="book-room__label">
+                                            <h4>sucursal</h3>
+                                            <h2>nombre de habitacion</h2>
+                                        </div>
+                                        <div class="book-room__room-details">
+                                            <p>Camas</p>
+                                            <p>Area</p>
+                                            <p>Capacidad</p>
+                                            <p>Baños</p>
+                                            <p>
+                                                0
+
+                                            </p>
+                                            <p>
+                                                0
+                                                <span>
+
+                                                </span>
+                                            </p>
+                                            <p>
+                                                0
+                                                <svg class="icon icon-small" style="height: 22px; width: 22px;">
+                                                    <use xlink:href="../assets/svg-resources.xml#icon-symbol-people"></use>
+                                                </svg>
+                                            </p>
+                                            <p>
+                                                0
+                                                <svg class="icon icon-small">
+                                                    <use xlink:href="../assets/svg-resources.xml#icon-symbol-bath"></use>
+                                                </svg>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="PageBox">
-                                bueno saber
                             </div>
                             <form id="book-form__base" action="./booking.jsp" class="PageBox multi-contents-vert">
                                 <div class="booking__wrapper">
@@ -384,7 +415,7 @@
                                                     <input id="text-1" maxlength="40" name="usr_name" type="text">
                                                     <label for="text-1">
                                                         <svg class="icon">
-                                                            <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-checked-correct"></use>
+                                                            <use id="validation-1" xlink:href=""></use>
                                                         </svg>
                                                     </label>
                                                 </section>
@@ -395,7 +426,7 @@
                                                     <input id="text-2" maxlength="40" name="usr_lastname" type="text">
                                                     <label for="text-2">
                                                         <svg class="icon">
-                                                            <use id="validation-2" xlink:href="../assets/svg-resources.xml#icon-checked-correct"></use>
+                                                            <use id="validation-2" xlink:href=""></use>
                                                         </svg>
                                                     </label>
                                                 </section>
@@ -408,7 +439,7 @@
                                                     <input id="text-3" maxlength="80" name="usr_email" type="text">
                                                     <label for="text-3">
                                                         <svg class="icon">
-                                                            <use id="validation-3" xlink:href="../assets/svg-resources.xml#icon-checked-correct"></use>
+                                                            <use id="validation-3" xlink:href=""></use>
                                                         </svg>
                                                     </label>
                                                 </section>
@@ -416,10 +447,10 @@
                                             <div>
                                                 <label for="text-4">Numero de telefono</label>
                                                 <section>
-                                                    <input id="text-4" name="usr_phoneNumber" type="number" min="1000000000" max="9999999999">
+                                                    <input id="text-4" name="usr_phoneNumber" type="text" maxlength="10">
                                                     <label for="text-4">
                                                         <svg class="icon">
-                                                            <use id="validation-4" xlink:href="../assets/svg-resources.xml#icon-checked-correct"></use>
+                                                            <use id="validation-4" xlink:href=""></use>
                                                         </svg>
                                                     </label>
                                                 </section>
@@ -433,7 +464,7 @@
                                                     <input id="check-1" type="checkbox">
                                                     <label for="check-1">
                                                         <svg class="icon">
-                                                            <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-check"></use>
+                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
                                                         </svg>
                                                     </label>
                                                 </span>
@@ -445,7 +476,7 @@
                                                         titulo
                                                         <button>
                                                             <svg class="icon">
-                                                                <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
+                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
                                                             </svg>
                                                         </button>
                                                     </h2>
@@ -459,10 +490,10 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-1" type="checkbox">
-                                                    <label for="check-1">
+                                                    <input id="check-2" type="checkbox">
+                                                    <label for="check-2">
                                                         <svg class="icon">
-                                                            <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-check"></use>
+                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
                                                         </svg>
                                                     </label>
                                                 </span>
@@ -474,7 +505,7 @@
                                                         titulo
                                                         <button>
                                                             <svg class="icon">
-                                                                <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
+                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
                                                             </svg>
                                                         </button>
                                                     </h2>
@@ -488,10 +519,10 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-1" type="checkbox">
-                                                    <label for="check-1">
+                                                    <input id="check-3" type="checkbox">
+                                                    <label for="check-3">
                                                         <svg class="icon">
-                                                            <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-check"></use>
+                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
                                                         </svg>
                                                     </label>
                                                 </span>
@@ -503,7 +534,7 @@
                                                         titulo
                                                         <button>
                                                             <svg class="icon">
-                                                                <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
+                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
                                                             </svg>
                                                         </button>
                                                     </h2>
@@ -517,10 +548,10 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-1" type="checkbox">
-                                                    <label for="check-1">
+                                                    <input id="check-4" type="checkbox">
+                                                    <label for="check-4">
                                                         <svg class="icon">
-                                                            <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-check"></use>
+                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
                                                         </svg>
                                                     </label>
                                                 </span>
@@ -532,7 +563,7 @@
                                                         titulo
                                                         <button>
                                                             <svg class="icon">
-                                                                <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
+                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
                                                             </svg>
                                                         </button>
                                                     </h2>
@@ -546,10 +577,10 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-1" type="checkbox">
-                                                    <label for="check-1">
+                                                    <input id="check-5" type="checkbox">
+                                                    <label for="check-5">
                                                         <svg class="icon">
-                                                            <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-check"></use>
+                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
                                                         </svg>
                                                     </label>
                                                 </span>
@@ -561,7 +592,7 @@
                                                         titulo
                                                         <button>
                                                             <svg class="icon">
-                                                                <use id="validation-1" xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
+                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
                                                             </svg>
                                                         </button>
                                                     </h2>
@@ -572,6 +603,12 @@
                                                 algo
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="hidden_values">
+                                        <input name="prev_dateIn" type="radio" checked="true" value="">
+                                        <input name="prev_dateOut" type="radio" checked="true" value="">
+                                        <input name="prev_branch" type="radio" checked="true" value="">
+                                        <input name="prev_room" type="radio" checked="true" value="">
                                     </div>
                                 </div>
                             </form>
@@ -636,7 +673,7 @@
                                         </div>
                                     </div>
                                     <div class="submit-wrapper">
-                                        <button class="button fade" type="button" onclick="document.getElementById('book-form__base').submit()">Solicitar reserva</button>
+                                        <button class="button fade" type="button" onclick="Booking_Validations()">Solicitar reserva</button>
                                     </div>
                                 </section>
                             </div>
@@ -808,5 +845,6 @@
                 }
             });
         </script>
+        <script src="../assets/scripts/booking_functions.js"></script>
     </body>
 </html>

@@ -306,14 +306,6 @@
         transform: translateY(50%);
         transition: ease .9s;
     }
-    & .Simple-ToRow {
-        display: flex;
-        flex-direction: column;
-        border-radius: 20px;
-        border: 1px solid orange;
-        margin: auto auto;
-        width: 90%;
-    }
     /* Tipos de Tarjetas */
     & .Squared-Card {
         width: 500px;
@@ -1136,6 +1128,53 @@
 
 }
 
+.book-room {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    border-radius: 20px;
+    border: 1px solid orange;
+    margin: auto auto;
+    padding: 10px;
+    width: 90%;
+    & .book-room__img {
+        display: inherit;
+        width: 300px;
+        height: 200px;
+        border: 1px solid green;
+    }
+    & .book-room__content {
+        display: inherit;
+        width: 55%;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid red;
+        & .book-room__label {
+            display: inherit;
+            flex-direction: inherit;
+            & h2 {
+                font-size: 26px;
+            }
+            & h4 {
+                font-size: 18px;
+            }
+        }
+        & .book-room__room-details {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 35px 45px;
+            margin-bottom: 10px;
+            & p {
+                font-size: 16px;
+                display: flex;
+                flex-direction: row;
+                column-gap: 20px;
+            }
+        }
+    }
+}
+
 .booking__wrapper {
     display: flex;
     flex-direction: column;
@@ -1172,6 +1211,43 @@
                         margin-right: auto;
                         border-radius: 10px 10px;
                         background-color: var(--input-bg-color);
+                        border: 2px solid transparent;
+                        outline: 0;
+                        &:invalid {
+                            --color: rgb(150, 0, 0);
+                            --color-fade: rgba(150, 0, 0, .3);
+                            &:focus-visible {
+                                border-color: var(--color);
+                                box-shadow: 0 0 0 3px var(--color-fade);
+                            }
+                            &:hover {
+                                border-color: var(--color);
+                            }
+                        }
+                        &:valid {
+                            --color: rgb(0, 150, 0);
+                            --color-fade: rgba(0, 150, 0, .3);
+                            &:focus-visible {
+                                border-color: var(--color);
+                                box-shadow: 0 0 0 3px var(--color-fade);
+                            }
+                            &:hover {
+                                border-color: var(--color);
+                            }
+                        }
+                        &:empty {
+                            --color: var(--color__gold-one);
+                            --color-fade: rgba(var(--color__gold-one--rgb), .5);
+                            &:focus-visible {
+                                border-color: var(--color);
+                            }
+                            &:focus {
+                                box-shadow: 0 0 0 4px var(--color-fade);
+                            }
+                            &:hover {
+                                border-color: var(--color);
+                            }
+                        }
                     }
                     & label {
                         position: absolute;
@@ -1204,14 +1280,14 @@
             & .card__summary {
                 display: grid;
                 width: 100%;
-                grid-template-columns: 50px 80px 1fr;
+                grid-template-columns: 52px 80px 1fr;
                 column-gap: 5px;
                 & span {
                     margin: 10px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    & input {
+                    & input[type="checkbox"] {
                         display: none;
                     }
                     & label {
@@ -1221,8 +1297,12 @@
                         width: 30px;
                         height: 30px;
                         background-color: var(--color__dark-gray_1);
-                        border: 1px solid green;
+                        color: var(--color__dark-gray_1);
+                        border: 1px solid white;
                         border-radius: 10px;
+                    }
+                    & input[type="checkbox"]:checked + label {
+                        color: white;
                     }
                 }
                 & section {

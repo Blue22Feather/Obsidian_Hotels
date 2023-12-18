@@ -13,6 +13,10 @@
     width: 40px;
 }
 
+.hidden_values {
+    display: none;
+}
+
 .icon-small {
     height: 18px;
     min-width: 18px;

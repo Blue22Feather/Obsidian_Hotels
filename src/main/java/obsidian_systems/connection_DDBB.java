@@ -1,4 +1,4 @@
-package main.obsidian_systems;
+package obsidian_systems;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

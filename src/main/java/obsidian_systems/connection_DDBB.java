@@ -14,7 +14,7 @@ public class connection_DDBB {
         System.out.println("cargando driver...");
         try {
             Class.forName(CONTROLADOR);
-            System.out.println("driver cargado");
+            //System.out.println("driver cargado");
         } catch (ClassNotFoundException e) {
             System.out.println("ERROR al cargar driver");
             e.printStackTrace();
@@ -23,10 +23,10 @@ public class connection_DDBB {
 
     public Connection conect() {
         Connection ctn = null;
-        System.out.println("conectando a la base de datos...");
+        //System.out.println("conectando a la base de datos...");
         try {
             ctn = DriverManager.getConnection(URL, USR, PSWD);
-            System.out.println("conexion activa");
+            //System.out.println("conexion activa");
         } catch (SQLException e) {
             System.out.println("ERROR al conectar a la base de datos");
             e.printStackTrace();

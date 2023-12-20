@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/* Formateo de moneda */
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /* Calculo de fechas */
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -33,7 +37,7 @@ public class gestion_form {
             rs = stm.executeQuery("SELECT " + findColumna + " FROM " + findTabla +" WHERE " + filter + " = " + filterValue);
             if (rs.next()) {
                 dataResult = rs.getString(findColumna);
-                System.out.println("Retornando datos...");
+                //System.out.println("Retornando datos...");
             } else {
                 System.out.println("ERROR en el retorno de datos");
             }
@@ -92,6 +96,19 @@ public class gestion_form {
         LocalDate end = LocalDate.parse(dateEnd);
 
         return ChronoUnit.DAYS.between(start, end);
+    }
+
+    public static int roomTotalPrice(String raw_filterValue, int stayDays) {
+        String raw_unitePrice = findData("room_unitPrice", "rooms", "room_id", raw_filterValue);
+        int unitePrice = Integer.parseInt(raw_unitePrice);
+
+        return unitePrice * stayDays;
+    }
+
+    public static String priceFormat(int Value) {
+        Locale argentina = new Locale.Builder().setLanguage("es").setRegion("AR").build();
+        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(argentina);
+        return formatoMoneda.format(Value);
     }
 }
 

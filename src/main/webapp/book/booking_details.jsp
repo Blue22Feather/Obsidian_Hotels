@@ -14,20 +14,42 @@
     </head>
     <body class="theme-dark">
         <%
-            //datos crudos
+            //Datos crudos
             String raw_hotelName = request.getParameter("book__branch");
             String raw_roomType = request.getParameter("book__hab-type");
+            System.out.println(raw_roomType);
             String raw_dateIn = request.getParameter("book__checkIn-date");
             String raw_dateOut = request.getParameter("book__checkOut-date");
 
-            //datos fijos
+            //Datos fijos
             String hotelName = gestion_form.findData("branch_name", "hotels", "branch_id", raw_hotelName);
-            String roomType = gestion_form.findData("room_name", "rooms", "room_id" , raw_roomType);
+            String roomName = gestion_form.findData("room_name", "rooms", "room_type" , raw_roomType);
             String dateIn = gestion_form.formatDate(raw_dateIn);
             String dateOut = gestion_form.formatDate(raw_dateOut);
+            String roomImag = gestion_form.findData("room_img", "rooms", "room_type" , raw_roomType);
 
             //Noches de estadia
-            long stayLenght = gestion_form.stayNights(raw_dateIn, raw_dateOut);
+            int stayLenght = (int) gestion_form.stayNights(raw_dateIn, raw_dateOut);
+
+            //Datos de la habitacion
+            int raw_roomUnitPrice = Integer.parseInt(gestion_form.findData("room_unitPrice", "rooms", "room_type" , raw_roomType));
+            System.out.println(raw_roomUnitPrice);
+            String roomUnitPrice = gestion_form.priceFormat(raw_roomUnitPrice);
+
+            int raw_roomTotalPrice = gestion_form.roomTotalPrice(raw_roomType, stayLenght);
+            String roomTotalPrice = gestion_form.priceFormat(raw_roomTotalPrice);
+
+            String roomBeds = gestion_form.findData("room_beds", "rooms", "room_type", raw_roomType);
+            String roomSpace = gestion_form.findData("room_area", "rooms", "room_type", raw_roomType);
+            String roomPeople = gestion_form.findData("room_guests", "rooms", "room_type", raw_roomType);
+            String roomBaths = gestion_form.findData("room_baths", "rooms", "room_type", raw_roomType);
+
+
+            //Datos de reserva
+            int raw_roomExtras = 0;
+            String roomExtras = gestion_form.priceFormat(raw_roomExtras);
+            int raw_bookTotalPrice = raw_roomTotalPrice + raw_roomExtras;
+            String bookTotalPrice = gestion_form.priceFormat(raw_bookTotalPrice);
         %>
         <div class="global-nav">
             <div class="global-nav__top">
@@ -386,13 +408,12 @@
                         <div class="page__content">
                             <div class="PageBox multi-card__wrapper">
                                 <div class="book-room">
-                                    <div class="book-room__img">
-                                        <img src="../assets/img/Hotels/Alma-Suites/Deluxe-Suite.jpg">
-                                    </div>
+                                    <div class="book-room__img" style="background-image: url(<%= roomImag %>);"></div>
                                     <div class="book-room__content">
                                         <div class="book-room__label">
                                             <h4><%= hotelName %></h3>
-                                            <h2><%= roomType %></h2>
+                                            <h2><%= roomName %></h2>
+                                            <h6 style="font-weight: 400">Desde <%= roomUnitPrice %> por noche</h6>
                                         </div>
                                         <div class="book-room__room-details">
                                             <p>Camas</p>
@@ -400,25 +421,25 @@
                                             <p>Capacidad</p>
                                             <p>Baños</p>
                                             <p>
-                                                0
+                                                <%= roomBeds %>
                                                 <svg class="icon icon-small">
                                                     <use xlink:href="../assets/svg-resources.xml#icon-bed"></use>
                                                 </svg>
                                             </p>
                                             <p>
-                                                0
+                                                <%= roomSpace %> m<sub>2</sub>
                                                 <svg class="icon icon-small">
                                                     <use xlink:href="../assets/svg-resources.xml#icon-scale"></use>
                                                 </svg>
                                             </p>
                                             <p>
-                                                0
+                                                <%= roomPeople %>
                                                 <svg class="icon icon-small" style="height: 22px; width: 22px;">
                                                     <use xlink:href="../assets/svg-resources.xml#icon-symbol-people"></use>
                                                 </svg>
                                             </p>
                                             <p>
-                                                0
+                                                <%= roomBaths %>
                                                 <svg class="icon icon-small">
                                                     <use xlink:href="../assets/svg-resources.xml#icon-symbol-bath"></use>
                                                 </svg>
@@ -628,10 +649,10 @@
                                         </div>
                                     </div>
                                     <div class="hidden_values">
-                                        <input name="prev_dateIn" type="radio" checked="true" value="<%= dateIn %>">
-                                        <input name="prev_dateOut" type="radio" checked="true" value="<%= dateOut %>">
-                                        <input name="prev_branch" type="radio" checked="true" value="<%= hotelName %>">
-                                        <input name="prev_room" type="radio" checked="true" value="<%= roomType %>">
+                                        <input name="prev_dateIn" type="radio" checked="true" value="<%= raw_dateIn %>">
+                                        <input name="prev_dateOut" type="radio" checked="true" value="<%= raw_dateOut %>">
+                                        <input name="prev_branch" type="radio" checked="true" value="<%= raw_hotelName %>">
+                                        <input name="prev_room" type="radio" checked="true" value="<%= raw_roomType %>">
                                     </div>
                                 </div>
                             </form>
@@ -672,27 +693,22 @@
                                         </div>
                                         <div class="single-text">
                                             <h4>Seleccion:</h2>
-                                            <span name="selection-type">nombre de seleccion</span>
-                                            <a name="reselect" class="link-action">Cambiar la seleccion</a>
+                                            <span name="selection-type"><%= roomName %> en <%= hotelName %></span>
                                         </div>
                                     </div>
                                     <h2>Resumen de precios</h2>
                                     <div class="facture__wrapper">
                                         <div class="double-text__row">
                                             <p>Habitacion</p>
-                                            <span>{value}</span>
+                                            <span><%= roomTotalPrice %></span>
                                         </div>
                                         <div class="double-text__row">
                                             <p>Extras</p>
-                                            <span>{value}</span>
-                                        </div>
-                                        <div class="double-text__row">
-                                            <p>IVA</p>
-                                            <span>{value}</span>
+                                            <span><%= roomExtras %></span>
                                         </div>
                                         <div class="double-text__row">
                                             <h2>Total</h2>
-                                            <span>{value}</span>
+                                            <span><%= bookTotalPrice %></span>
                                         </div>
                                     </div>
                                     <div class="submit-wrapper">

@@ -32,7 +32,7 @@ public class gestion_form {
         ResultSet rs = null;
 
         try {
-            System.out.println("Buscando datos...");
+            //System.out.println("Buscando datos...");
             stm = cn.createStatement();
             rs = stm.executeQuery("SELECT " + findColumna + " FROM " + findTabla +" WHERE " + filter + " = " + filterValue);
             if (rs.next()) {
@@ -71,8 +71,66 @@ public class gestion_form {
                 System.out.println("error al cerrar la Conexion");
             }
         }
+        System.out.println("El valor de " + findColumna + " en " + findTabla + " donde " + filter + " sea " + filterValue + " es " + dataResult);
         return dataResult;
     }
+
+    public static String findDataDouble(String findColumna, String findTabla, String filter, String raw_filterValue, String filter2, String raw_filterValue2) {
+        /* Variables de metodo */
+        String dataResult = null;
+        int filterValue = Integer.parseInt(raw_filterValue);
+
+        /* Variables de funcion */
+        connection_DDBB connex = new connection_DDBB();
+
+        Connection cn = connex.conect();
+        Statement stm = null;
+        ResultSet rs = null;
+
+        try {
+            //System.out.println("Buscando datos...");
+            stm = cn.createStatement();
+            rs = stm.executeQuery("SELECT " + findColumna + " FROM " + findTabla +" WHERE " + filter + " = " + filterValue + " AND " + filter2 + " = " + raw_filterValue2);
+            if (rs.next()) {
+                dataResult = rs.getString(findColumna);
+                //System.out.println("Retornando datos...");
+            } else {
+                System.out.println("ERROR en el retorno de datos");
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR en la busqueda de datos");
+            e.printStackTrace();
+        } finally {
+            // Cerrar la conexión y liberar recursos
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("error al cerrar el ResultSet");
+            }
+
+            try {
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (SQLException e) {
+                // Manejo de excepciones al cerrar el Statement
+                System.out.println("error al cerrar el Statement");
+            }
+
+            try {
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("error al cerrar la Conexion");
+            }
+        }
+        System.out.println("El valor de " + findColumna + " en " + findTabla + " donde " + filter + " sea " + filterValue + " es " + dataResult);
+        return dataResult;
+    }
+
 
     public static String formatDate(String dateIn) {
         try {
@@ -98,8 +156,8 @@ public class gestion_form {
         return ChronoUnit.DAYS.between(start, end);
     }
 
-    public static int roomTotalPrice(String raw_filterValue, int stayDays) {
-        String raw_unitePrice = findData("room_unitPrice", "rooms", "room_id", raw_filterValue);
+    public static int roomTotalPrice(String raw_roomType, String raw_hotelID, int stayDays) {
+        String raw_unitePrice = findDataDouble("room_unitPrice", "rooms", "room_type", raw_roomType, "hotel_ID", raw_hotelID);
         int unitePrice = Integer.parseInt(raw_unitePrice);
 
         return unitePrice * stayDays;

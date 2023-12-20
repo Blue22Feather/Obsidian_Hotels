@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "obsidian_systems.gestion_form"%>
-
 <!DOCTYPE html>
 
 <html>
@@ -13,42 +10,6 @@
         <link rel="stylesheet" href="../assets/stylesheets/component-styles.css">
     </head>
     <body class="theme-dark">
-        <%
-            //Datos crudos
-            String raw_hotelName = request.getParameter("book__branch");
-            String raw_roomType = request.getParameter("book__hab-type");
-            String raw_dateIn = request.getParameter("book__checkIn-date");
-            String raw_dateOut = request.getParameter("book__checkOut-date");
-
-            //Datos fijos
-            String hotelName = gestion_form.findData("branch_name", "hotels", "branch_id", raw_hotelName);
-            String roomName = gestion_form.findDataDouble("room_name", "rooms", "room_type" , raw_roomType, "hotel_id", raw_hotelName);
-            String dateIn = gestion_form.formatDate(raw_dateIn);
-            String dateOut = gestion_form.formatDate(raw_dateOut);
-            String roomImag = gestion_form.findDataDouble("room_img", "rooms", "room_type" , raw_roomType, "hotel_id", raw_hotelName);
-
-            //Noches de estadia
-            int stayLenght = (int) gestion_form.stayNights(raw_dateIn, raw_dateOut);
-
-            //Datos de la habitacion
-            int raw_roomUnitPrice = Integer.parseInt(gestion_form.findDataDouble("room_unitPrice", "rooms", "room_type" , raw_roomType, "hotel_id", raw_hotelName));
-            String roomUnitPrice = gestion_form.priceFormat(raw_roomUnitPrice);
-
-            int raw_roomTotalPrice = gestion_form.roomTotalPrice(raw_roomType, raw_hotelName, stayLenght);
-            String roomTotalPrice = gestion_form.priceFormat(raw_roomTotalPrice);
-
-            String roomBeds = gestion_form.findDataDouble("room_beds", "rooms", "room_type", raw_roomType, "hotel_id", raw_hotelName);
-            String roomSpace = gestion_form.findDataDouble("room_area", "rooms", "room_type", raw_roomType, "hotel_id", raw_hotelName);
-            String roomPeople = gestion_form.findDataDouble("room_guests", "rooms", "room_type", raw_roomType, "hotel_id", raw_hotelName);
-            String roomBaths = gestion_form.findDataDouble("room_baths", "rooms", "room_type", raw_roomType, "hotel_id", raw_hotelName);
-
-
-            //Datos de reserva
-            int raw_roomExtras = 0;
-            String roomExtras = gestion_form.priceFormat(raw_roomExtras);
-            int raw_bookTotalPrice = raw_roomTotalPrice + raw_roomExtras;
-            String bookTotalPrice = gestion_form.priceFormat(raw_bookTotalPrice);
-        %>
         <div class="global-nav">
             <div class="global-nav__top">
                 <nav class="global-nav__nav" aria-label="Navegación en el sitio">
@@ -104,7 +65,7 @@
                         </a>
                     </div>
                 </nav>
-            </div>
+            </div>                
             <div class="global-nav__bottom">
                 <div class="dropdown open-to-right is-attached-to-bottom">
                     <div class="dropdown__toggle">
@@ -376,8 +337,8 @@
                         </div>
                     </header>
                 </div>
-                <div class="page has-right-rail">
-                    <main class="page__main has" lang="es">
+                <div class="page">
+                    <main class="page__main" lang="es">
                         <div class="page__side-tools__wrapper">
                             <div class="page__side-tools">
                                 <button class="page__side-tool" name="content-size-toggle" aria-label="Expandir">
@@ -393,329 +354,22 @@
                                     <span class="process done">1</span>
                                     <hr class="conector done">
                                     <span class="process done">2</span>
-                                    <hr class="conector">
-                                    <span class="process">3</span>
+                                    <hr class="conector done">
+                                    <span class="process done">3</span>
                                     <hr class="conector">
                                     <span class="process">4</span>
                                 </div>
                                 <div class="book-process__label">
-                                    <h2>Detalles de reserva y extras</h2>
+                                    <h2>Facturacion y pago</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="page__content">
-                            <div class="PageBox multi-card__wrapper">
-                                <div class="book-room">
-                                    <div class="book-room__img" style="background-image: url(<%= roomImag %>);"></div>
-                                    <div class="book-room__content">
-                                        <div class="book-room__label">
-                                            <h4><%= hotelName %></h3>
-                                            <h2><%= roomName %></h2>
-                                            <h6 style="font-weight: 400">Desde <%= roomUnitPrice %> por noche</h6>
-                                        </div>
-                                        <div class="book-room__room-details">
-                                            <p>Camas</p>
-                                            <p>Area</p>
-                                            <p>Capacidad</p>
-                                            <p>Baños</p>
-                                            <p>
-                                                <%= roomBeds %>
-                                                <svg class="icon icon-small">
-                                                    <use xlink:href="../assets/svg-resources.xml#icon-bed"></use>
-                                                </svg>
-                                            </p>
-                                            <p>
-                                                <%= roomSpace %> m<sub>2</sub>
-                                                <svg class="icon icon-small">
-                                                    <use xlink:href="../assets/svg-resources.xml#icon-scale"></use>
-                                                </svg>
-                                            </p>
-                                            <p>
-                                                <%= roomPeople %>
-                                                <svg class="icon icon-small" style="height: 22px; width: 22px;">
-                                                    <use xlink:href="../assets/svg-resources.xml#icon-symbol-people"></use>
-                                                </svg>
-                                            </p>
-                                            <p>
-                                                <%= roomBaths %>
-                                                <svg class="icon icon-small">
-                                                    <use xlink:href="../assets/svg-resources.xml#icon-symbol-bath"></use>
-                                                </svg>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <form id="book-form__base" action="./booking.jsp" class="PageBox multi-contents-vert">
-                                <div class="booking__wrapper">
-                                    <div class="booking__details">
-                                        <h2>Ingresa tu información para la reserva</h2>
-                                        <div class="booking__input-row-double">
-                                            <div>
-                                                <label for="text-1">Nombre(s)</label>
-                                                <section>
-                                                    <input id="text-1" maxlength="40" name="usr_name" type="text">
-                                                    <label for="text-1">
-                                                        <svg class="icon">
-                                                            <use id="validation-1" xlink:href=""></use>
-                                                        </svg>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div>
-                                                <label for="text-2">Apellido(s)</label>
-                                                <section>
-                                                    <input id="text-2" maxlength="40" name="usr_lastname" type="text">
-                                                    <label for="text-2">
-                                                        <svg class="icon">
-                                                            <use id="validation-2" xlink:href=""></use>
-                                                        </svg>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </div>
-                                        <div class="booking__input-row-double">
-                                            <div>
-                                                <label for="text-3">Direccion de correo electronico</label>
-                                                <section>
-                                                    <input id="text-3" maxlength="80" name="usr_email" type="text">
-                                                    <label for="text-3">
-                                                        <svg class="icon">
-                                                            <use id="validation-3" xlink:href=""></use>
-                                                        </svg>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div>
-                                                <label for="text-4">Numero de telefono</label>
-                                                <section>
-                                                    <input id="text-4" name="usr_phoneNumber" type="text" maxlength="10">
-                                                    <label for="text-4">
-                                                        <svg class="icon">
-                                                            <use id="validation-4" xlink:href=""></use>
-                                                        </svg>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="extras__wrapper">
-                                        <div class="extras__card">
-                                            <div class="card__summary">
-                                                <span>
-                                                    <input id="check-1" type="checkbox">
-                                                    <label for="check-1">
-                                                        <svg class="icon">
-                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
-                                                        </svg>
-                                                    </label>
-                                                </span>
-                                                <section>
-                                                    icono
-                                                </section>
-                                                <div>
-                                                    <h2>
-                                                        titulo
-                                                        <button>
-                                                            <svg class="icon">
-                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
-                                                            </svg>
-                                                        </button>
-                                                    </h2>
-                                                    <p>descripcion</p>
-                                                </div>
-                                            </div>
-                                            <div class="card__content">
-                                                algo
-                                            </div>
-                                        </div>
-                                        <div class="extras__card">
-                                            <div class="card__summary">
-                                                <span>
-                                                    <input id="check-2" type="checkbox">
-                                                    <label for="check-2">
-                                                        <svg class="icon">
-                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
-                                                        </svg>
-                                                    </label>
-                                                </span>
-                                                <section>
-                                                    icono
-                                                </section>
-                                                <div>
-                                                    <h2>
-                                                        titulo
-                                                        <button>
-                                                            <svg class="icon">
-                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
-                                                            </svg>
-                                                        </button>
-                                                    </h2>
-                                                    <p>descripcion</p>
-                                                </div>
-                                            </div>
-                                            <div class="card__content">
-                                                algo
-                                            </div>
-                                        </div>
-                                        <div class="extras__card">
-                                            <div class="card__summary">
-                                                <span>
-                                                    <input id="check-3" type="checkbox">
-                                                    <label for="check-3">
-                                                        <svg class="icon">
-                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
-                                                        </svg>
-                                                    </label>
-                                                </span>
-                                                <section>
-                                                    icono
-                                                </section>
-                                                <div>
-                                                    <h2>
-                                                        titulo
-                                                        <button>
-                                                            <svg class="icon">
-                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
-                                                            </svg>
-                                                        </button>
-                                                    </h2>
-                                                    <p>descripcion</p>
-                                                </div>
-                                            </div>
-                                            <div class="card__content">
-                                                algo
-                                            </div>
-                                        </div>
-                                        <div class="extras__card">
-                                            <div class="card__summary">
-                                                <span>
-                                                    <input id="check-4" type="checkbox">
-                                                    <label for="check-4">
-                                                        <svg class="icon">
-                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
-                                                        </svg>
-                                                    </label>
-                                                </span>
-                                                <section>
-                                                    icono
-                                                </section>
-                                                <div>
-                                                    <h2>
-                                                        titulo
-                                                        <button>
-                                                            <svg class="icon">
-                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
-                                                            </svg>
-                                                        </button>
-                                                    </h2>
-                                                    <p>descripcion</p>
-                                                </div>
-                                            </div>
-                                            <div class="card__content">
-                                                algo
-                                            </div>
-                                        </div>
-                                        <div class="extras__card">
-                                            <div class="card__summary">
-                                                <span>
-                                                    <input id="check-5" type="checkbox">
-                                                    <label for="check-5">
-                                                        <svg class="icon">
-                                                            <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
-                                                        </svg>
-                                                    </label>
-                                                </span>
-                                                <section>
-                                                    icono
-                                                </section>
-                                                <div>
-                                                    <h2>
-                                                        titulo
-                                                        <button>
-                                                            <svg class="icon">
-                                                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
-                                                            </svg>
-                                                        </button>
-                                                    </h2>
-                                                    <p>descripcion</p>
-                                                </div>
-                                            </div>
-                                            <div class="card__content">
-                                                algo
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hidden_values">
-                                        <input name="prev_dateIn" type="radio" checked="true" value="<%= raw_dateIn %>">
-                                        <input name="prev_dateOut" type="radio" checked="true" value="<%= raw_dateOut %>">
-                                        <input name="prev_branch" type="radio" checked="true" value="<%= raw_hotelName %>">
-                                        <input name="prev_room" type="radio" checked="true" value="<%= raw_roomType %>">
-                                    </div>
-                                </div>
+                            <form action="booking_details.jsp" class="PageBox BackgroundBlur multi-contents-vert">
                             </form>
                         </div>
                         <div class="page__footer"></div>
                     </main>
-                    <aside class="page__right-rail">
-                        <button class="right-rail-toggle">
-                            <svg class="icon">
-                                <use xlink:href="../assets/svg-resources.xml#icon-minimalist-arrow"></use>
-                            </svg>
-                        </button>
-                        <div class="right-rail-wrapper">
-                            <div class="sticky-modules-wrapper">
-                                <section class="rail-module">
-                                    <h2>Resumen de reserva</h2>
-                                    <div class="round-square">
-                                        <div class="double-text tittles">
-                                            <h4>Check-In</h4>
-                                            <h4>Check-Out</h4>
-                                        </div>
-                                        <div class="double-text content">
-                                            <p name="check-in-date"><%= dateIn %></p>
-                                            <hr>
-                                            <p name="check-out-date"><%= dateOut %></p>
-                                            <p name="check-in-time">03:00 pm</p>
-                                            <hr>
-                                            <p name="check-out-time">11:00 am</p>
-                                        </div>
-                                        <div class="single-text">
-                                            <h4>Duración total de la estancia:</h2>
-                                            <span>
-                                                <p name="days-lenght"><%= stayLenght %> noches</p>
-                                                <svg class="icon">
-                                                    <use xlink:href="../assets/svg-resources.xml#icon-calendar"></use>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <div class="single-text">
-                                            <h4>Seleccion:</h2>
-                                            <span name="selection-type"><%= roomName %> en <%= hotelName %></span>
-                                        </div>
-                                    </div>
-                                    <h2>Resumen de precios</h2>
-                                    <div class="facture__wrapper">
-                                        <div class="double-text__row">
-                                            <p>Habitacion</p>
-                                            <span><%= roomTotalPrice %></span>
-                                        </div>
-                                        <div class="double-text__row">
-                                            <p>Extras</p>
-                                            <span><%= roomExtras %></span>
-                                        </div>
-                                        <div class="double-text__row">
-                                            <h2>Total</h2>
-                                            <span><%= bookTotalPrice %></span>
-                                        </div>
-                                    </div>
-                                    <div class="submit-wrapper">
-                                        <button class="button fade" type="button" onclick="Booking_Validations()">Solicitar reserva</button>
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
-                    </aside>
                 </div>
                 <div id="mixed-content-footer" class="mcf-wolf">
                     <div class="mcf-wrapper"></div>
@@ -870,18 +524,5 @@
                 elemento[0].classList[scrolling ? 'add' : 'remove']('is-visible');
             });
         </script>
-        <script aria-description="side-panel-function">
-            var togglePanel_btn = document.getElementsByClassName("right-rail-toggle")[0];
-            togglePanel_btn.addEventListener('click', function() {
-                var pannelObj = document.getElementsByClassName("page__right-rail")[0],
-                    pannelState = pannelObj.classList.contains("is-rail-hidden");
-                if (pannelState == false) {
-                    pannelObj.classList.add('is-rail-hidden');
-                } else {
-                    pannelObj.classList.remove('is-rail-hidden');
-                }
-            });
-        </script>
-        <script src="../assets/scripts/booking_functions.js"></script>
     </body>
 </html>

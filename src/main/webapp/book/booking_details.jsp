@@ -42,7 +42,6 @@
             String roomPeople = gestion_form.findDataDouble("room_guests", "rooms", "room_type", raw_roomType, "hotel_id", raw_hotelName);
             String roomBaths = gestion_form.findDataDouble("room_baths", "rooms", "room_type", raw_roomType, "hotel_id", raw_hotelName);
 
-
             //Datos de reserva
             int raw_roomExtras = 0;
             String roomExtras = gestion_form.priceFormat(raw_roomExtras);
@@ -503,7 +502,7 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-1" type="checkbox">
+                                                    <input id="check-1" type="checkbox" onclick="checkAll()" value="<%= gestion_form.getExtrasPrice("1") %>">
                                                     <label for="check-1">
                                                         <svg class="icon">
                                                             <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
@@ -517,7 +516,7 @@
                                                 </section>
                                                 <div>
                                                     <h2>
-                                                        Paquete romantico
+                                                        Paquete de Romance
                                                     </h2>
                                                     <p>Agrega a la habitacion una atmosfera de romance, incluye cenas exclusivas en zonas pacificas, shows de luces, y opcion a regalos sorpresa personalizados</p>
                                                 </div>
@@ -526,7 +525,7 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-2" type="checkbox">
+                                                    <input id="check-2" type="checkbox" onclick="checkAll()" value="<%= gestion_form.getExtrasPrice("2") %>">
                                                     <label for="check-2">
                                                         <svg class="icon">
                                                             <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
@@ -540,7 +539,7 @@
                                                 </section>
                                                 <div>
                                                     <h2>
-                                                        Paquete vigorozo
+                                                        Paquete de Vigor
                                                     </h2>
                                                     <p>Incluye talleres diurnos de senderismo, ejercicios en la naturaleza, natacion, y muchas mas actividades similares.</p>
                                                 </div>
@@ -549,7 +548,7 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-3" type="checkbox">
+                                                    <input id="check-3" type="checkbox" onclick="checkAll()" value="<%= gestion_form.getExtrasPrice("3") %>">
                                                     <label for="check-3">
                                                         <svg class="icon">
                                                             <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
@@ -572,7 +571,7 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-4" type="checkbox">
+                                                    <input id="check-4" type="checkbox" onclick="checkAll()" value="<%= gestion_form.getExtrasPrice("4") %>">
                                                     <label for="check-4">
                                                         <svg class="icon">
                                                             <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
@@ -586,7 +585,7 @@
                                                 </section>
                                                 <div>
                                                     <h2>
-                                                        Paquete artistico
+                                                        Paquete de Arte
                                                     </h2>
                                                     <p>Talleres de fotografia y pintura; asi como acceso optativo a equipos del hotel para dichas actividades.</p>
                                                 </div>
@@ -595,7 +594,7 @@
                                         <div class="extras__card">
                                             <div class="card__summary">
                                                 <span>
-                                                    <input id="check-5" type="checkbox">
+                                                    <input id="check-5" type="checkbox" onclick="checkAll()" value="<%= gestion_form.getExtrasPrice("5") %>">
                                                     <label for="check-5">
                                                         <svg class="icon">
                                                             <use xlink:href="../assets/svg-resources.xml#icon-check"></use>
@@ -621,6 +620,8 @@
                                         <input name="prev_dateOut" type="radio" checked="true" value="<%= raw_dateOut %>">
                                         <input name="prev_branch" type="radio" checked="true" value="<%= raw_hotelName %>">
                                         <input name="prev_room" type="radio" checked="true" value="<%= raw_roomType %>">
+                                        <input name="extrasPriceTotal" type="radio" checked="true" value="">
+                                        <input name="PriceTotal" type="radio" checked="true" value="">
                                     </div>
                                 </div>
                             </form>
@@ -653,7 +654,7 @@
                                         <div class="single-text">
                                             <h4>Duración total de la estancia:</h2>
                                             <span>
-                                                <p name="days-lenght"><%= stayLenght %> noches</p>
+                                                <p name="days-lenght" value="<%= stayLenght %>"><%= stayLenght %> noches</p>
                                                 <svg class="icon">
                                                     <use xlink:href="../assets/svg-resources.xml#icon-calendar"></use>
                                                 </svg>
@@ -668,15 +669,16 @@
                                     <div class="facture__wrapper">
                                         <div class="double-text__row">
                                             <p>Habitacion</p>
-                                            <span><%= roomTotalPrice %></span>
+                                            <span id="roomValue__wrapper"><%= roomTotalPrice %></span>
+                                            <input id="roomValue__value" style="display: none;" type="radio" checked="true" value="<%= raw_roomTotalPrice %>">
                                         </div>
                                         <div class="double-text__row">
                                             <p>Extras</p>
-                                            <span><%= roomExtras %></span>
+                                            <span id="extrasValue__wrapper"><%= roomExtras %></span>
                                         </div>
                                         <div class="double-text__row">
                                             <h2>Total</h2>
-                                            <span><%= bookTotalPrice %></span>
+                                            <span id="totalPrice_wrapper"><%= bookTotalPrice %></span>
                                         </div>
                                     </div>
                                     <div class="submit-wrapper">
@@ -853,5 +855,43 @@
             });
         </script>
         <script src="../assets/scripts/booking_functions.js"></script>
+        <script>
+            let identifiers = ["check-1", "check-2", "check-3", "check-4", "check-5"];
+            let checkboxOBJ = identifiers.map(id => document.getElementById(id));
+            let extraValues = Array(checkboxOBJ.length).fill("0");
+            let roomTotalPriceJS = parseInt(document.getElementById("roomValue__value").value);
+            let subTotalPriceJS = 0;
+            let TotalPrice = 0;
+
+            function formatMoney(n) {
+                return n.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
+            }
+
+            function refreshFacture() {
+                TotalPrice = roomTotalPriceJS + subTotalPriceJS;
+
+                document.getElementById("extrasValue__wrapper").textContent = formatMoney(subTotalPriceJS);
+                document.getElementById("totalPrice_wrapper").textContent = formatMoney(TotalPrice);
+                document.getElementsByName("extrasPriceTotal")[0].value = subTotalPriceJS;
+                document.getElementsByName("PriceTotal")[0].value = TotalPrice;
+            }
+
+            function checkAll() {
+                checkboxOBJ.forEach((checkbox, index) => {
+                    if (checkbox.checked) {
+                        extraValues[index] = parseInt(checkbox.value);
+                    } else {
+                        extraValues[index] = 0;
+                    }
+                });
+
+                subTotalPriceJS = 0;
+                for (var i = 0; i < extraValues.length; i++) {
+                    subTotalPriceJS += extraValues[i];
+                }
+
+                refreshFacture();
+            }
+        </script>
     </body>
 </html>

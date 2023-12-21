@@ -88,11 +88,11 @@ CREATE TABLE `guests` (
   `person_id` int(11) NOT NULL AUTO_INCREMENT,
   `names` varchar(40) NOT NULL,
   `lastnames` varchar(40) NOT NULL,
-  `phone_number` int(10) NOT NULL,
+  `phone_number` varchar(10) NOT NULL,
   `mail` varchar(80) NOT NULL,
   `pswd` varchar(18) DEFAULT NULL,
   PRIMARY KEY (`person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `guests` (
 LOCK TABLES `guests` WRITE;
 /*!40000 ALTER TABLE `guests` DISABLE KEYS */;
 INSERT INTO `guests` VALUES
-(1,'ALGO','BETO',1122334455,'algobeto@example',NULL);
+(5,'Vicente','Gomez','1122334455','vicent.gomez@example.com',NULL);
 /*!40000 ALTER TABLE `guests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `hotel_services` (
   `service_value` int(9) NOT NULL,
   `service_detail` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`service_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,6 +159,12 @@ CREATE TABLE `hotel_services` (
 
 LOCK TABLES `hotel_services` WRITE;
 /*!40000 ALTER TABLE `hotel_services` DISABLE KEYS */;
+INSERT INTO `hotel_services` VALUES
+(1,'Paquete de Romance','avanaible','varios',20000,NULL),
+(2,'Paquete de Vigor','avanaible','varios',20000,NULL),
+(3,'Paquete de Bienestar','avanaible','varios',40000,NULL),
+(4,'Paquete de Arte','avanaible','varios',60000,NULL),
+(5,'Paquete de Juegos','avanaible','varios',30000,NULL);
 /*!40000 ALTER TABLE `hotel_services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +218,7 @@ CREATE TABLE `hotels` (
   `branch_name` varchar(40) NOT NULL,
   `branch_location` varchar(40) NOT NULL,
   PRIMARY KEY (`branch_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,6 +227,12 @@ CREATE TABLE `hotels` (
 
 LOCK TABLES `hotels` WRITE;
 /*!40000 ALTER TABLE `hotels` DISABLE KEYS */;
+INSERT INTO `hotels` VALUES
+(1,'Alma del Lago Suites','Av. Ezequiel Bustillo Km 1.151'),
+(2,'El Casco Art Hotel','Av. Ezequiel Bustillo Km 11.5'),
+(3,'Charming Luxury Lodge','Hua Huan 7549'),
+(4,'Estancia Peuma Hue','Ruta 40 km 2014'),
+(5,'Llao Llao Resorts','Av. Ezequiel Bustillo Km 25');
 /*!40000 ALTER TABLE `hotels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,7 +348,7 @@ CREATE TABLE `room_reservations` (
   KEY `room_id` (`room_id`),
   CONSTRAINT `room_reservations_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `guests` (`person_id`),
   CONSTRAINT `room_reservations_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,6 +357,8 @@ CREATE TABLE `room_reservations` (
 
 LOCK TABLES `room_reservations` WRITE;
 /*!40000 ALTER TABLE `room_reservations` DISABLE KEYS */;
+INSERT INTO `room_reservations` VALUES
+(3,5,3,'2023-12-21','2024-01-03','2023-12-21 23:12:51');
 /*!40000 ALTER TABLE `room_reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,13 +372,20 @@ DROP TABLE IF EXISTS `rooms`;
 CREATE TABLE `rooms` (
   `room_id` int(11) NOT NULL AUTO_INCREMENT,
   `hotel_id` int(11) NOT NULL,
-  `room_num` int(4) NOT NULL,
+  `room_type` int(4) NOT NULL,
   `room_status` varchar(12) DEFAULT NULL,
-  `room_type` varchar(16) DEFAULT NULL,
+  `room_name` varchar(40) DEFAULT NULL,
+  `room_area` int(3) DEFAULT NULL,
+  `room_beds` int(1) DEFAULT NULL,
+  `room_guests` int(2) DEFAULT NULL,
+  `room_baths` int(1) DEFAULT NULL,
+  `room_img` varchar(80) DEFAULT NULL,
+  `room_unitPrice` int(9) NOT NULL,
+  `room_num` int(4) DEFAULT NULL,
   PRIMARY KEY (`room_id`),
   KEY `hotel_id` (`hotel_id`),
   CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`branch_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -373,6 +394,18 @@ CREATE TABLE `rooms` (
 
 LOCK TABLES `rooms` WRITE;
 /*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
+INSERT INTO `rooms` VALUES
+(1,1,4,'avanaible','Deluxe suites',44,1,3,1,'../assets/img/Hotels/Alma-Suites/Deluxe-Suite.jpg',220000,401),
+(2,1,6,'avanaible','Master suites',101,3,4,1,'../assets/img/Hotels/Alma-Suites/Master-Suite-1.jpg',1114000,601),
+(3,1,3,'occupied','Junior suites',36,2,4,1,'../assets/img/Hotels/Alma-Suites/Junior-Suite-1.jpg',209000,301),
+(4,1,1,'avanaible','Classic lago',25,1,2,1,'../assets/img/Hotels/Alma-Suites/Classic-Lago.jpg',157000,101),
+(5,1,2,'avanaible','Superior lago',31,2,4,1,'../assets/img/Hotels/Alma-Suites/Superior-Lago-1.jpg',175000,201),
+(6,1,5,'avanaible','Torre suites',65,2,4,2,'../assets/img/Hotels/Alma-Suites/Torre-Suite.jpg',372000,501),
+(7,2,1,'avanaible','Bustillo studio',30,1,2,1,'../assets/img/Hotels/Casco-Art/Bustillo-Estandar-Estudio.jpg',205000,101),
+(8,2,2,'avanaible','Nahuel studio',45,1,2,1,'../assets/img/Hotels/Casco-Art/Nahuel-Estudio.jpg',313000,201),
+(9,3,1,'avanaible','Suite clasica',30,1,2,1,'../assets/img/Hotels/Charming-Luxury/Suite-Clasica.jpg',257000,101),
+(10,4,1,'avanaible','Casa del Coihue',70,2,4,2,'../assets/img/Hotels/Peuma-Hue/Casa-del-Coihue.jpg',300000,101),
+(11,5,1,'avanaible','Lago superior',23,1,2,1,'../assets/img/Hotels/Llao-Llao/Lago-Superior.jpg',450000,101);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
 

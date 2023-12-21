@@ -20,10 +20,26 @@
             String raw_dateIn = request.getParameter("prev_dateIn");
             String raw_dateOut = request.getParameter("prev_dateOut");
             
-            String raw_guestName = request.getParameter("guest_name");
-            String raw_guestLastName = request.getParameter("guest_lastname");
-            String raw_guestEmail = request.getParameter("guest_email");
-            String raw_guestPhone = request.getParameter("guest_phoneNumber");
+            String raw_guestName = request.getParameter("prev_guestName");
+            String raw_guestLastName = request.getParameter("prev_guestLastName");
+            String raw_guestEmail = request.getParameter("prev_guestEmail");
+            String raw_guestPhone = request.getParameter("prev_guestPhone");
+
+            int raw_stayLenght = (int) gestion_form.stayNights(raw_dateIn, raw_dateOut);
+
+            //Datos fijos
+            String hotelName = gestion_form.findData("branch_name", "hotels", "branch_id", raw_hotelName);
+            String roomName = gestion_form.findDataDouble("room_name", "rooms", "room_type" , raw_roomType, "hotel_id", raw_hotelName);
+            String dateIn = gestion_form.formatDate(raw_dateIn);
+            String dateOut = gestion_form.formatDate(raw_dateOut);
+            String roomImag = gestion_form.findDataDouble("room_img", "rooms", "room_type" , raw_roomType, "hotel_id", raw_hotelName);
+
+            String stayLenght = String.valueOf(raw_stayLenght) + " Noches";
+
+            //resultados
+            gestion_form.guestAdd(raw_guestName, raw_guestLastName, raw_guestPhone, raw_guestEmail);
+            String bookFinal = gestion_form.reservationAdd(raw_guestName, raw_guestLastName, raw_dateIn, raw_dateOut, raw_roomType, raw_hotelName);
+
         %>
         <div class="global-nav">
             <div class="global-nav__top">
@@ -397,45 +413,45 @@
                                     <div>
                                         <h4>Huesped</h4>
                                         <span>
-                                            <p>tal tal</p>
+                                            <p><%= raw_guestName + " " + raw_guestLastName %></p>
                                         </span>
                                     </div>
                                     <div>
                                         <h4>Fecha de entrada</h4>
                                         <span>
-                                            <p>Fecha</p>
+                                            <p><%= dateIn %></p>
                                             <p>Hora</p>
                                         </span>
                                     </div>
                                     <div>
                                         <h4>Fecha de salida</h4>
                                         <span>
-                                            <p>Fecha</p>
+                                            <p><%= dateOut %></p>
                                             <p>Hora</p>
                                         </span>
                                     </div>
                                     <div>
                                         <h4>Tu reserva</h4>
                                         <span>
-                                            <p>nombre de la habitacion y dias</p>
+                                            <p><%= roomName + " en " + hotelName + " por " + stayLenght%></p>
                                         </span>
                                     </div>
                                     <div>
                                         <h4>Numero de telefono</h4>
                                         <span>
-                                            <p>telefono</p>
+                                            <p><%= raw_guestPhone %></p>
                                         </span>
                                     </div>
                                     <div>
                                         <h4>Email</h4>
                                         <span>
-                                            <p>correo</p>
+                                            <p><%= raw_guestEmail %></p>
                                         </span>
                                     </div>
                                     <div>
                                         <h4>Numero de reserva</h4>
                                         <span>
-                                            <p>num</p>
+                                            <p>#<%= bookFinal %></p>
                                         </span>
                                     </div>
                                 </div>

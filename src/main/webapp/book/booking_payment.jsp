@@ -25,6 +25,9 @@
             String raw_guestEmail = request.getParameter("guest_email");
             String raw_guestPhone = request.getParameter("guest_phoneNumber");
 
+            int raw_ServicesPrice = Integer.parseInt(request.getParameter("extrasPriceTotal"));
+            int raw_TotalPrice = Integer.parseInt(request.getParameter("PriceTotal"));
+
             int raw_stayLenght = (int) gestion_form.stayNights(raw_dateIn, raw_dateOut);
             int raw_roomUnitPrice = Integer.parseInt(gestion_form.findDataDouble("room_unitPrice", "rooms", "room_type" , raw_roomType, "hotel_id", raw_hotelName));
             int raw_roomTotalPrice = gestion_form.roomTotalPrice(raw_roomType, raw_hotelName, raw_stayLenght);
@@ -37,6 +40,8 @@
             String roomUnitPrice = gestion_form.priceFormat(raw_roomUnitPrice);
             String roomTotalPrice = gestion_form.priceFormat(raw_roomTotalPrice);
 
+            String ServicesPrice = gestion_form.priceFormat(raw_ServicesPrice);
+            String PriceFinal = gestion_form.priceFormat(raw_TotalPrice);
         %>
         <div class="global-nav">
             <div class="global-nav__top">
@@ -400,13 +405,25 @@
                                             <p>Servicio</p>
                                             <p>Valor unitario</p>
                                             <p>Cantidad</p>
-                                            <p>Total</p>
+                                            <p>SubTotal</p>
                                         </div>
                                         <div>
                                             <p><%= roomName %> en <%= hotelName %></p>
                                             <p><%= roomUnitPrice %></p>
                                             <p><%= stayLenght %></p>
                                             <p><%= roomTotalPrice %></p>
+                                        </div>
+                                        <div>
+                                            <p>SubTotal de servicios extras</p>
+                                            <p><%= ServicesPrice %></p>
+                                            <p>...</p>
+                                            <p><%= ServicesPrice %></p>
+                                        </div>
+                                        <div>
+                                            <p style="font-size: 18px; font-weight: 500;">Total de la reserva</p>
+                                            <p></p>
+                                            <p></p>
+                                            <p style="color: var(--color__orange-one);"><%= PriceFinal %></p>
                                         </div>
                                     </div>
                                 </div>
@@ -427,17 +444,17 @@
                                     </div>
                                     <div class="payment-details">
                                         <div class="payment-row">
-                                            <label for="">Numero de la tarjeta*</label>
-                                            <input type="text">
+                                            <label for="card_num">Numero de la tarjeta*</label>
+                                            <input id="card_num" type="text" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?)$" placeholder="411122223333" required>
                                         </div>
                                         <div class="payment-row">
-                                            <label for="">Titular de la tarjeta*</label>
-                                            <input type="text">
+                                            <label for="cardhold">Titular de la tarjeta*</label>
+                                            <input id="cardhold" type="text" placeholder="Nombre como aparece en la tarjeta" required>
                                         </div>
                                         <div class="payment-row" csssize="double">
-                                            <label for="">Fecha de expiracion*</label>
+                                            <label for="month_card">Fecha de expiracion*</label>
                                             <span>
-                                                <select name="card-month" required>
+                                                <select id="month_card" name="card-month" required>
                                                     <option value="" disabled selected>Mes</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -456,8 +473,8 @@
                                             </span>
                                         </div>
                                         <div class="payment-row">
-                                            <label for="">CVC*</label>
-                                            <input type="text">
+                                            <label for="card_code">CVC*</label>
+                                            <input id="card_code" type="number" min="100" max="999">
                                         </div>
                                     </div>
                                     <span class="ha">
@@ -466,7 +483,14 @@
                                     </span>
                                 </div>
                                 <div class="hidden_values">
-
+                                    <input name="prev_dateIn" type="radio" checked="true" value="<%= raw_dateIn %>">
+                                    <input name="prev_dateOut" type="radio" checked="true" value="<%= raw_dateOut %>">
+                                    <input name="prev_branch" type="radio" checked="true" value="<%= raw_hotelName %>">
+                                    <input name="prev_room" type="radio" checked="true" value="<%= raw_roomType %>">
+                                    <input name="prev_guestName" type="radio" checked="true" value="<%= raw_guestName %>">
+                                    <input name="prev_guestLastName" type="radio" checked="true" value="<%= raw_guestLastName %>">
+                                    <input name="prev_guestEmail" type="radio" checked="true" value="<%= raw_guestEmail %>">
+                                    <input name="prev_guestPhone" type="radio" checked="true" value="<%= raw_guestPhone %>">
                                 </div>
                             </form>
                         </div>
@@ -625,6 +649,11 @@
                 var scrolling = window.scrollY > 250;
                 elemento[0].classList[scrolling ? 'add' : 'remove']('is-visible');
             });
+        </script>
+        <script aria-description="auto-select">
+            window.onload = function () {
+                document.getElementById('pay_1').checked = true;
+            };
         </script>
     </body>
 </html>

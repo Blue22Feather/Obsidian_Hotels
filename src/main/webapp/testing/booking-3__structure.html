@@ -365,7 +365,81 @@
                             </div>
                         </div>
                         <div class="page__content">
-                            <form action="booking_details.jsp" class="PageBox BackgroundBlur multi-contents-vert">
+                            <form action="booking_details.jsp" style="flex-direction: column;" class="PageBox BackgroundExtraDark">
+                                <div class="booking-facture__wrapper">
+                                    <div class="summary">
+                                        <div class="summary__header">
+                                            <p>Servicio</p>
+                                            <p>Valor unitario</p>
+                                            <p>Cantidad</p>
+                                            <p>Total</p>
+                                        </div>
+                                        <div>
+                                            <p>1</p>
+                                            <p>2</p>
+                                            <p>3</p>
+                                            <p>4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment__wrapper">
+                                    <div class="payment-type">
+                                        <span>
+                                            <input id="pay_1" type="radio" name="payment_type" value="1" required>
+                                            <label for="pay_1">
+                                                <img src="../assets/img/Mastercard-Logo.png" alt="">
+                                            </label>
+                                        </span>
+                                        <span>
+                                            <input id="pay_2" type="radio" name="payment_type" value="2" required>
+                                            <label for="pay_2">
+                                                <img src="../assets/img/Visa-Logo.png" alt="">
+                                            </label>
+                                        </span>
+                                    </div>
+                                    <div class="payment-details">
+                                        <div class="payment-row">
+                                            <label for="">Numero de la tarjeta*</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="payment-row">
+                                            <label for="">Titular de la tarjeta*</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="payment-row" csssize="double">
+                                            <label for="">Fecha de expiracion*</label>
+                                            <span>
+                                                <select name="card-month" required>
+                                                    <option value="" disabled selected>Mes</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                  </select>
+                                                <input type="number" placeholder="Año" min="2024" max="2050" required>
+                                            </span>
+                                        </div>
+                                        <div class="payment-row">
+                                            <label for="">CVC*</label>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                    <span class="ha">
+                                        <button type="reset" class="button standard">Borrar</button>
+                                        <button type="submit" class="button fade">Confirmar pago</button>
+                                    </span>
+                                </div>
+                                <div class="hidden_values">
+
+                                </div>
                             </form>
                         </div>
                         <div class="page__footer"></div>
